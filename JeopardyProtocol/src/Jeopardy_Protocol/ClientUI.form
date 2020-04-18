@@ -25,45 +25,54 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButtonSendObject" max="32767" attributes="0"/>
+                          <Component id="jButtonSendMessage" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelHistory" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelName" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButtonSendObject" max="32767" attributes="0"/>
-                                  <Component id="jButtonSendMessage" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabelIP" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelPort" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                          <Component id="jLabelHistory" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="218" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelIP" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldIP" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelPort" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextFieldPort" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jButtonDisconnect" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldPort" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldIP" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButtonConnect" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jButtonDisconnect" min="-2" pref="142" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="Abutton" min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="Bbutton" min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="Cbutton" min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <Component id="Dbutton" min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,28 +86,35 @@
                   <Component id="jButtonSendMessage" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonSendObject" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldPort" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelPort" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonSendObject" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelHistory" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jButtonConnect" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="jButtonDisconnect" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabelHistory" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="170" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Abutton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Bbutton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Cbutton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Dbutton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -199,6 +215,30 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSendObjectActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Abutton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="A"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Bbutton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="B"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Cbutton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="Dbutton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="D"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

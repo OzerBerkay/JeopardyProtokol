@@ -38,6 +38,10 @@ public class ClientUI extends javax.swing.JFrame {
         jLabelPort = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
         jButtonSendObject = new javax.swing.JButton();
+        Abutton = new javax.swing.JButton();
+        Bbutton = new javax.swing.JButton();
+        Cbutton = new javax.swing.JButton();
+        Dbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Client");
@@ -97,40 +101,60 @@ public class ClientUI extends javax.swing.JFrame {
             }
         });
 
+        Abutton.setText("A");
+        Abutton.setEnabled(false);
+
+        Bbutton.setText("B");
+        Bbutton.setEnabled(false);
+
+        Cbutton.setText("C");
+        Cbutton.setEnabled(false);
+
+        Dbutton.setText("D");
+        Dbutton.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelName)
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonSendObject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonSendMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(275, 275, 275)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelIP)
+                                    .addComponent(jLabelPort)))
                             .addComponent(jLabelHistory)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelName)
-                                .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonSendObject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonSendMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane2))
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelIP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldIP))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelPort)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldPort))
-                            .addComponent(jButtonConnect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(4, 4, 4)))
-                .addContainerGap())
+                            .addComponent(jButtonDisconnect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldPort, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldIP)
+                            .addComponent(jButtonConnect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(Abutton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(Bbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(Cbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(Dbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,24 +165,30 @@ public class ClientUI extends javax.swing.JFrame {
                     .addComponent(jLabelIP)
                     .addComponent(jButtonSendMessage)
                     .addComponent(jLabelName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSendObject)
                     .addComponent(jTextFieldPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPort)
-                    .addComponent(jButtonSendObject))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelHistory))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jLabelPort))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonConnect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDisconnect)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(22, 22, 22)
+                        .addComponent(jButtonDisconnect))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelHistory)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Abutton)
+                    .addComponent(Bbutton)
+                    .addComponent(Cbutton)
+                    .addComponent(Dbutton))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,6 +208,29 @@ public class ClientUI extends javax.swing.JFrame {
             enableConnectButton();
         }
     }//GEN-LAST:event_jButtonConnectActionPerformed
+
+    private void jButtonSendObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendObjectActionPerformed
+        try {
+            String message = jTextPaneMessage.getText();
+
+            if (!message.isEmpty()) {
+                Mesaj mesajNesnem = new Mesaj();
+                mesajNesnem.text = message;
+
+                // nesne içerisinde mesajı gönder
+                client.sendObject(mesajNesnem);
+
+                jTextPaneMessage.setText("");
+            }
+
+            if (message.equals("son")) {
+                jButtonDisconnectActionPerformed(evt);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error - jButtonConnectActionPerformed : " + ex);
+            enableConnectButton();
+        }
+    }//GEN-LAST:event_jButtonSendObjectActionPerformed
 
     private void jButtonSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendMessageActionPerformed
         try {
@@ -206,29 +259,6 @@ public class ClientUI extends javax.swing.JFrame {
             System.out.println("Error - jButtonDisconnectActionPerformed : " + ex);
         }
     }//GEN-LAST:event_jButtonDisconnectActionPerformed
-
-    private void jButtonSendObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendObjectActionPerformed
-        try {
-            String message = jTextPaneMessage.getText();
-
-            if (!message.isEmpty()) {
-                Mesaj mesajNesnem = new Mesaj();
-                mesajNesnem.text = message;
-
-                // nesne içerisinde mesajı gönder
-                client.sendObject(mesajNesnem);
-
-                jTextPaneMessage.setText("");
-            }
-
-            if (message.equals("son")) {
-                jButtonDisconnectActionPerformed(evt);
-            }
-        } catch (IOException ex) {
-            System.out.println("Error - jButtonConnectActionPerformed : " + ex);
-            enableConnectButton();
-        }
-    }//GEN-LAST:event_jButtonSendObjectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +297,10 @@ public class ClientUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Abutton;
+    private javax.swing.JButton Bbutton;
+    private javax.swing.JButton Cbutton;
+    private javax.swing.JButton Dbutton;
     private javax.swing.JButton jButtonConnect;
     private javax.swing.JButton jButtonDisconnect;
     private javax.swing.JButton jButtonSendMessage;
