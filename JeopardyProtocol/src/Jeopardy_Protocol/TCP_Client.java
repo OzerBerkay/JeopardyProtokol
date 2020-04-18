@@ -23,7 +23,7 @@ public class TCP_Client {
         this.historyJTextPane = jTextPaneHistory;
         // client arayüzündeki isim yazısı, client ismi server tarafından belirlenecek
         this.nameJLabel = jLabelName;
-
+        //DENME
         // input  : client'a gelen mesajları okumak için
         // output : client'dan bağlı olduğu server'a mesaj göndermek için
         clientOutput = new ObjectOutputStream(clientSocket.getOutputStream());
