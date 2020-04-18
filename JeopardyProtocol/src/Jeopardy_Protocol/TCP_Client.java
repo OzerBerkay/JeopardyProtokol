@@ -31,6 +31,8 @@ public class TCP_Client {
         // server'ı sürekli dinlemek için Thread oluştur
         clientThread = new ListenThread();
         clientThread.start();
+
+        //DENEMEEE
     }
 
     protected void sendMessage(String message) throws IOException {
