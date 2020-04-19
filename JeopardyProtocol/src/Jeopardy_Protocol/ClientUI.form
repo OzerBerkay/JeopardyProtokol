@@ -221,24 +221,36 @@
         <Property name="text" type="java.lang.String" value="A"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AbuttonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Bbutton">
       <Properties>
         <Property name="text" type="java.lang.String" value="B"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BbuttonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Cbutton">
       <Properties>
         <Property name="text" type="java.lang.String" value="C"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CbuttonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Dbutton">
       <Properties>
         <Property name="text" type="java.lang.String" value="D"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DbuttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
