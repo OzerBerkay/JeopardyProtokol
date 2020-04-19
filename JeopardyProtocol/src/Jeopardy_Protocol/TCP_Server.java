@@ -6,7 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
-
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TCP_Server {
 
@@ -14,7 +16,11 @@ public class TCP_Server {
     private javax.swing.JTextPane historyJTextPane;
     private Thread serverThread;
     private HashSet<ObjectOutputStream> allClients = new HashSet<>();
-
+    String[][] soru = {{"Soru1: Türkiyenin Baskenti Neresidir? \n A)Ankara  \nB)Bursa  \nC)İzmir  \nD)Denizli ", "A"},
+    {"Soru2: Kadıköy nerededir? \nA)Ankara  \nB)Bursa  \nC)İstanbul  \nD)Denizli ", "C"},
+    {"Soru3: Osmangazi nerededir ? \nA)Ankara  \nB)Bursa  \nC)İzmir  \nD)Denizli ", "B"}};
+    int siradakiSoru = 0;//Burak Enes Demir
+    int deneme = 1;//Burak Enes Demir
     protected void start(int port, javax.swing.JTextPane jTextPaneHistory) throws IOException {
         // server soketi oluşturma (sadece port numarası)
         serverSocket = new ServerSocket(port);
@@ -107,6 +113,24 @@ public class TCP_Server {
                         out.writeObject(this.getName() + ": " + mesaj);
                     }
 
+                    for (ObjectOutputStream out : allClients) {//Burak Enes Demir
+                        out.writeObject("Cevap Kontrol Ediliyor Lütfen Bekleyiniz...");
+                    }
+                    TimeUnit.SECONDS.sleep(4);
+                    if (mesaj.equals(soru[siradakiSoru][1])) {//Burak Enes Demir
+                        sendBroadcast("Dogru cevap!");
+                        siradakiSoru++;
+                        TimeUnit.SECONDS.sleep(4);
+                        sendBroadcast(soru[siradakiSoru][0]);
+                    } else if (deneme == 1) {//Burak Enes Demir
+                        sendBroadcast("Yanlis cevap!");
+                        deneme++;
+                    } else {//Burak Enes Demir
+                        sendBroadcast("Kimse Bilemedi!");
+                        siradakiSoru++;
+                        deneme = 1;
+                        sendBroadcast(soru[siradakiSoru][0]);
+                    }
                     // "son" mesajı iletişimi sonlandırır
                     if (mesaj.equals("son")) {
                         break;
@@ -115,6 +139,8 @@ public class TCP_Server {
 
             } catch (IOException | ClassNotFoundException ex) {
                 System.out.println("Hata - ListenThread : " + ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TCP_Server.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
                     // client'ların tutulduğu listeden çıkart
