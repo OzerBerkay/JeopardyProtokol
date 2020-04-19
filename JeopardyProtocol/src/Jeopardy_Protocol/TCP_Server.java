@@ -105,6 +105,15 @@ public class TCP_Server {
 
                 // client ismini mesaj olarak gönder
                 clientOutput.writeObject("@id-" + this.getName());
+                
+                //soru sayısını kontrol et
+                if (allClients.size() == 2) {//Burak Enes Demir
+                    if (soru.length > 0) {
+                        sendBroadcast(soru[siradakiSoru][0]);
+                    } else {
+                        sendBroadcast("Hiç sorumuz kalmamıştır!");
+                    }
+                }
 
                 Object mesaj;
                 // client mesaj gönderdiği sürece mesajı al
