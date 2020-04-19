@@ -17,7 +17,10 @@ public class TCP_Client {
     private javax.swing.JButton bbut;
     private javax.swing.JButton cbut;
     private javax.swing.JButton dbut;
+
     String LastSender = "th:";//Çağrı Üstün
+
+
 
     protected void start(String host, int port, javax.swing.JTextPane jTextPaneHistory,
             javax.swing.JLabel jLabelName, javax.swing.JButton Abutton,
@@ -70,6 +73,7 @@ public class TCP_Client {
         this.dbut.setEnabled(false);
     }
 
+
     protected void writeToHistory(Object message) {//Çağrı Üstün
         // client arayüzündeki history alanına mesajı yaz
 
@@ -92,6 +96,11 @@ public class TCP_Client {
             LastSender = mes.substring(0, mes.indexOf(':')).trim();
             System.out.println(LastSender);
         }
+
+    protected void writeToHistory(Object message) {
+        // client arayüzündeki history alanına mesajı yaz
+        historyJTextPane.setText(historyJTextPane.getText() + "\n" + message);
+
     }
 
     protected void disconnect() throws IOException {
