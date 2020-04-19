@@ -21,6 +21,8 @@ public class TCP_Server {
     {"Soru3: Osmangazi nerededir ? \nA)Ankara  \nB)Bursa  \nC)İzmir  \nD)Denizli ", "B"}};
     int siradakiSoru = 0;//Burak Enes Demir
     int deneme = 1;//Burak Enes Demir
+    String[][] tred = new String[2][2];//Berkay Özer
+
     protected void start(int port, javax.swing.JTextPane jTextPaneHistory) throws IOException {
         // server soketi oluşturma (sadece port numarası)
         serverSocket = new ServerSocket(port);
@@ -95,6 +97,8 @@ public class TCP_Server {
                 for (ObjectOutputStream out : allClients) {
                     out.writeObject(this.getName() + " server'a katıldı.");
                 }
+                tred[allClients.size()][0] = this.getName(); //Eklenen clientlerin adını ve puanlarını arrayde tutuyor
+                tred[allClients.size()][1] = "0";//Berkay Özer
 
                 // broadcast için, yeni gelen client'ın output stream'ını listeye ekler
                 allClients.add(clientOutput);
@@ -115,11 +119,24 @@ public class TCP_Server {
 
                     for (ObjectOutputStream out : allClients) {//Burak Enes Demir
                         out.writeObject("Cevap Kontrol Ediliyor Lütfen Bekleyiniz...");
+
                     }
                     TimeUnit.SECONDS.sleep(4);
                     if (mesaj.equals(soru[siradakiSoru][1])) {//Burak Enes Demir
                         sendBroadcast("Dogru cevap!");
+                        for (int i = 0; i < tred.length; i++) {//Berkay Özer
+                            if (tred[i][0].equals(this.getName())) {    //doğru bilenin puanı artırılır
+                                tred[i][1] = "" + (Integer.parseInt(tred[i][1]) + 1);
+                            }
+                            sendBroadcast(tred[i][0] + "'in puani:" + tred[i][1]); //tüm puanlar soru sonu ekrana yazdırılır
+                        }
                         siradakiSoru++;
+                        if (siradakiSoru == soru.length - 1) { //Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
+                            sendBroadcast("Son soruya ulaştınız!!");
+                        } else if (siradakiSoru == soru.length || allClients.size() < 2) {//Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
+                            sendBroadcast("Yarisma bitmistir!!");
+                            break;
+                        }
                         TimeUnit.SECONDS.sleep(4);
                         sendBroadcast(soru[siradakiSoru][0]);
                     } else if (deneme == 1) {//Burak Enes Demir
@@ -127,16 +144,25 @@ public class TCP_Server {
                         deneme++;
                     } else {//Burak Enes Demir
                         sendBroadcast("Kimse Bilemedi!");
+                        for (int i = 0; i < tred.length; i++) {//Berkay Özer
+                            sendBroadcast(tred[i][0] + "'in puani:" + tred[i][1]);  ////tüm puanlar soru sonu ekrana yazdırılır
+                        }
                         siradakiSoru++;
+                        if (siradakiSoru == soru.length - 1) {//Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
+                            sendBroadcast("Son soruya ulaştınız!!");
+                        } else if (siradakiSoru == soru.length || allClients.size() < 2) {
+                            sendBroadcast("Yarisma bitmistir!!");
+                            break;
+                        }
                         deneme = 1;
                         sendBroadcast(soru[siradakiSoru][0]);
                     }
+
                     // "son" mesajı iletişimi sonlandırır
                     if (mesaj.equals("son")) {
                         break;
                     }
                 }
-
             } catch (IOException | ClassNotFoundException ex) {
                 System.out.println("Hata - ListenThread : " + ex);
             } catch (InterruptedException ex) {
