@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
 public class TCP_Client {
 
     private Socket clientSocket;
@@ -14,8 +13,16 @@ public class TCP_Client {
     private javax.swing.JTextPane historyJTextPane;
     private javax.swing.JLabel nameJLabel;
     private Thread clientThread;
+    private javax.swing.JButton abut;//Ömer Faruk Küçüker
+    private javax.swing.JButton bbut;
+    private javax.swing.JButton cbut;
+    private javax.swing.JButton dbut;
 
-    protected void start(String host, int port, javax.swing.JTextPane jTextPaneHistory, javax.swing.JLabel jLabelName) throws IOException {
+
+    protected void start(String host, int port, javax.swing.JTextPane jTextPaneHistory,
+            javax.swing.JLabel jLabelName, javax.swing.JButton Abutton,
+            javax.swing.JButton Bbutton, javax.swing.JButton Cbutton,
+            javax.swing.JButton Dbutton) throws IOException {//Ömer Faruk Küçüker
         // client soketi oluşturma (ip + port numarası)
         clientSocket = new Socket(host, port);
 
@@ -23,6 +30,12 @@ public class TCP_Client {
         this.historyJTextPane = jTextPaneHistory;
         // client arayüzündeki isim yazısı, client ismi server tarafından belirlenecek
         this.nameJLabel = jLabelName;
+
+        //Butonlarımızı arayüzdekiler ile eşleştirdik.
+        this.abut = Abutton;
+        this.bbut = Bbutton;
+        this.cbut = Cbutton;
+        this.dbut = Dbutton;
         // input  : client'a gelen mesajları okumak için
         // output : client'dan bağlı olduğu server'a mesaj göndermek için
         clientOutput = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -31,8 +44,6 @@ public class TCP_Client {
         // server'ı sürekli dinlemek için Thread oluştur
         clientThread = new ListenThread();
         clientThread.start();
-
-        //DENEMEEE
     }
 
     protected void sendMessage(String message) throws IOException {
@@ -43,6 +54,20 @@ public class TCP_Client {
     protected void sendObject(Object message) throws IOException {
         // gelen nesneyi server'a gönder
         clientOutput.writeObject(message);
+    }
+
+    protected void openButtons() { //Ömer Faruk Küçüker
+        this.abut.setEnabled(true);
+        this.bbut.setEnabled(true);
+        this.cbut.setEnabled(true);
+        this.dbut.setEnabled(true);
+    }
+
+    protected void closeButtons() {//Ömer Faruk Küçüker
+        this.abut.setEnabled(false);
+        this.bbut.setEnabled(false);
+        this.cbut.setEnabled(false);
+        this.dbut.setEnabled(false);
     }
 
     protected void writeToHistory(Object message) {

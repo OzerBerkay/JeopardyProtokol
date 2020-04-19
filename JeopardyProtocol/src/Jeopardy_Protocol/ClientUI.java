@@ -103,15 +103,35 @@ public class ClientUI extends javax.swing.JFrame {
 
         Abutton.setText("A");
         Abutton.setEnabled(false);
+        Abutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbuttonActionPerformed(evt);
+            }
+        });
 
         Bbutton.setText("B");
         Bbutton.setEnabled(false);
+        Bbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BbuttonActionPerformed(evt);
+            }
+        });
 
         Cbutton.setText("C");
         Cbutton.setEnabled(false);
+        Cbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbuttonActionPerformed(evt);
+            }
+        });
 
         Dbutton.setText("D");
         Dbutton.setEnabled(false);
+        Dbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,12 +215,12 @@ public class ClientUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectActionPerformed
-        try {
+        try {//Ömer Faruk Küçüker
             String host = jTextFieldIP.getText();
             int port = Integer.parseInt(jTextFieldPort.getText());
 
             client = new TCP_Client();
-            client.start(host, port, jTextPaneHistory, jLabelName);
+            client.start(host, port, jTextPaneHistory, jLabelName, Abutton, Bbutton, Cbutton, Dbutton);
 
             disableConnectButton();
         } catch (IOException ex) {
@@ -259,6 +279,82 @@ public class ClientUI extends javax.swing.JFrame {
             System.out.println("Error - jButtonDisconnectActionPerformed : " + ex);
         }
     }//GEN-LAST:event_jButtonDisconnectActionPerformed
+
+    private void AbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbuttonActionPerformed
+        try {   //Ömer Faruk Küçüker
+            String message = Abutton.getText();
+
+            if (!message.isEmpty()) {
+                // String mesaj gönder
+                client.sendMessage(message);
+                jTextPaneMessage.setText("");
+            }
+
+            if (message.equals("son")) {
+                jButtonDisconnectActionPerformed(evt);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error - jButtonConnectActionPerformed : " + ex);
+            enableConnectButton();
+        }
+    }//GEN-LAST:event_AbuttonActionPerformed
+
+    private void BbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BbuttonActionPerformed
+        try {//Ömer Faruk Küçüker
+            String message = Bbutton.getText();
+
+            if (!message.isEmpty()) {
+                // String mesaj gönder
+                client.sendMessage(message);
+                jTextPaneMessage.setText("");
+            }
+
+            if (message.equals("son")) {
+                jButtonDisconnectActionPerformed(evt);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error - jButtonConnectActionPerformed : " + ex);
+            enableConnectButton();
+        }
+    }//GEN-LAST:event_BbuttonActionPerformed
+
+    private void CbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbuttonActionPerformed
+        try {//Ömer Faruk Küçüker
+            String message = Cbutton.getText();
+
+            if (!message.isEmpty()) {
+                // String mesaj gönder
+                client.sendMessage(message);
+                jTextPaneMessage.setText("");
+            }
+
+            if (message.equals("son")) {
+                jButtonDisconnectActionPerformed(evt);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error - jButtonConnectActionPerformed : " + ex);
+            enableConnectButton();
+        }
+    }//GEN-LAST:event_CbuttonActionPerformed
+
+    private void DbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DbuttonActionPerformed
+        try {//Ömer Faruk Küçüker
+            String message = Dbutton.getText();
+
+            if (!message.isEmpty()) {
+                // String mesaj gönder
+                client.sendMessage(message);
+                jTextPaneMessage.setText("");
+            }
+
+            if (message.equals("son")) {
+                jButtonDisconnectActionPerformed(evt);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error - jButtonConnectActionPerformed : " + ex);
+            enableConnectButton();
+        }
+    }//GEN-LAST:event_DbuttonActionPerformed
 
     /**
      * @param args the command line arguments
