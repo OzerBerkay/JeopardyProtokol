@@ -5,7 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,6 +75,20 @@ public class TCP_Server {
         }
     }
 
+    protected void findWinner(String[][] arr) throws IOException { //birincileri belirleme metodu
+        List<Integer> list = new ArrayList<Integer>(); //Ömer Faruk Küçüker
+        for (int i = 0; i < arr.length; i++) {
+            list.add(Integer.parseInt(arr[i][1]));
+        }
+        int max = Collections.max(list);
+        sendBroadcast("Birinci/Birinciler:");
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i][1].equals(Integer.toString(max))) {
+                sendBroadcast(arr[i][0] + "\n");
+            }
+        }
+    }
+
     class ListenThread extends Thread {
 
         // dinleyeceğimiz client'ın soket nesnesi, input ve output stream'leri
@@ -105,7 +122,7 @@ public class TCP_Server {
 
                 // client ismini mesaj olarak gönder
                 clientOutput.writeObject("@id-" + this.getName());
-                
+
                 //soru sayısını kontrol et
                 if (allClients.size() == 2) {//Burak Enes Demir
                     if (soru.length > 0) {
@@ -144,6 +161,7 @@ public class TCP_Server {
                             sendBroadcast("Son soruya ulaştınız!!");
                         } else if (siradakiSoru == soru.length || allClients.size() < 2) {//Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
                             sendBroadcast("Yarisma bitmistir!!");
+                            findWinner(tred);//Ömer Faruk Küçüker
                             break;
                         }
                         TimeUnit.SECONDS.sleep(4);
@@ -161,6 +179,7 @@ public class TCP_Server {
                             sendBroadcast("Son soruya ulaştınız!!");
                         } else if (siradakiSoru == soru.length || allClients.size() < 2) {
                             sendBroadcast("Yarisma bitmistir!!");
+                            findWinner(tred);//Ömer Faruk Küçüker
                             break;
                         }
                         deneme = 1;
