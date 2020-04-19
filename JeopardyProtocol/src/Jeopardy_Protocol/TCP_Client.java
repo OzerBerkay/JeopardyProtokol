@@ -18,6 +18,9 @@ public class TCP_Client {
     private javax.swing.JButton cbut;
     private javax.swing.JButton dbut;
 
+    String LastSender = "th:";//Çağrı Üstün
+
+
 
     protected void start(String host, int port, javax.swing.JTextPane jTextPaneHistory,
             javax.swing.JLabel jLabelName, javax.swing.JButton Abutton,
@@ -70,9 +73,34 @@ public class TCP_Client {
         this.dbut.setEnabled(false);
     }
 
+
+    protected void writeToHistory(Object message) {//Çağrı Üstün
+        // client arayüzündeki history alanına mesajı yaz
+
+        String mes = message.toString();
+        if (mes.contains("Soru")) {// Bir soru geldiğinde butonlar aktif olur
+            historyJTextPane.setText("");
+            openButtons();
+        } else if (mes.contains("Yanlis cevap!")) { // cevap yanlışsa tüm clientların butonları aktif olur
+            openButtons();
+            if (nameJLabel.getText().equals(LastSender)) { //yanlış veren kullanıcının butonları aktif olmaz
+                closeButtons();
+            }
+        } else if (mes.contains("Dogru cevap!") || mes.contains("Cevap Kontrol Ediliyor Lütfen Bekleyiniz...")) {// doğru cevap verildiğinde sıradaki soru için herkesin butonları kapatılır.
+            closeButtons();
+        } else if (mes.contains("Kimse Bilemedi!")) {// ikinci cevapta da yanlış cevap verilirse sonraki soru için herkesin butonları kapatılır.
+            closeButtons();
+        }
+        historyJTextPane.setText(historyJTextPane.getText() + "\n" + message);
+        if (mes.contains(":") && !mes.contains("Server")) { //en son mesaj yollayan kullanıcının kim olduğu belirlenir
+            LastSender = mes.substring(0, mes.indexOf(':')).trim();
+            System.out.println(LastSender);
+        }
+
     protected void writeToHistory(Object message) {
         // client arayüzündeki history alanına mesajı yaz
         historyJTextPane.setText(historyJTextPane.getText() + "\n" + message);
+
     }
 
     protected void disconnect() throws IOException {
