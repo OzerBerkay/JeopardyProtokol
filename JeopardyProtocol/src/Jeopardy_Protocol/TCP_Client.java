@@ -97,12 +97,6 @@ public class TCP_Client {
             System.out.println(LastSender);
         }
 
-    protected void writeToHistory(Object message) {
-        // client arayüzündeki history alanına mesajı yaz
-        historyJTextPane.setText(historyJTextPane.getText() + "\n" + message);
-
-    }
-
     protected void disconnect() throws IOException {
         // bütün streamleri ve soketleri kapat
         if (clientInput != null) {
