@@ -96,6 +96,7 @@ public class TCP_Client {
             LastSender = mes.substring(0, mes.indexOf(':')).trim();
             System.out.println(LastSender);
         }
+    }
 
     protected void disconnect() throws IOException {
         // bütün streamleri ve soketleri kapat
