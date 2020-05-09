@@ -74,7 +74,29 @@ public class TCP_Server {
             serverThread.interrupt();
         }
     }
+    
+    public void checkClientSizeAndQuestion() {
+        if (allClients.size() > 1) {//Burak Enes Demir
+            try {
+                if (soru.length > 0) {
+                    sendBroadcast(soru[siradakiSoru][0]);
+                } else {
+                    sendBroadcast("Hiç sorumuz kalmamıştır!");
+                }
+            } catch (Exception e) {
+                System.out.println("Olmadı!" + e.getMessage());
+            }
 
+        }
+    }
+    protected void prepareServer(String[][] arr){
+        if(arr.length > 0)
+        {
+            //BURADA ÖNCE SERVERUI ' daki stop butonu çalışacak
+            //ARDINDAN START BUTONU ÇALIŞACAK 
+            //ServerUI.jButtonStartActionPerformed();
+        }
+    }
     protected void findWinner(String[][] arr) throws IOException { //birincileri belirleme metodu
         List<Integer> list = new ArrayList<Integer>(); //Ömer Faruk Küçüker
         for (int i = 0; i < arr.length; i++) {
@@ -122,15 +144,9 @@ public class TCP_Server {
 
                 // client ismini mesaj olarak gönder
                 clientOutput.writeObject("@id-" + this.getName());
-
+                 
                 //soru sayısını kontrol et
-                if (allClients.size() == 2) {//Burak Enes Demir
-                    if (soru.length > 0) {
-                        sendBroadcast(soru[siradakiSoru][0]);
-                    } else {
-                        sendBroadcast("Hiç sorumuz kalmamıştır!");
-                    }
-                }
+                checkClientSizeAndQuestion();
 
                 Object mesaj;
                 // client mesaj gönderdiği sürece mesajı al
@@ -199,6 +215,7 @@ public class TCP_Server {
                 try {
                     // client'ların tutulduğu listeden çıkart
                     allClients.remove(clientOutput);
+                    checkClientSizeAndQuestion();
 
                     // bütün client'lara ayrılma mesajı gönder
                     for (ObjectOutputStream out : allClients) {

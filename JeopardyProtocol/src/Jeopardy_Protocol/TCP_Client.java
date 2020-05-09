@@ -20,8 +20,6 @@ public class TCP_Client {
 
     String LastSender = "th:";//Çağrı Üstün
 
-
-
     protected void start(String host, int port, javax.swing.JTextPane jTextPaneHistory,
             javax.swing.JLabel jLabelName, javax.swing.JButton Abutton,
             javax.swing.JButton Bbutton, javax.swing.JButton Cbutton,
@@ -73,10 +71,8 @@ public class TCP_Client {
         this.dbut.setEnabled(false);
     }
 
-
     protected void writeToHistory(Object message) {//Çağrı Üstün
         // client arayüzündeki history alanına mesajı yaz
-
         String mes = message.toString();
         if (mes.contains("Soru")) {// Bir soru geldiğinde butonlar aktif olur
             historyJTextPane.setText("");
@@ -144,5 +140,4 @@ public class TCP_Client {
             }
         }
     }
-
 }
