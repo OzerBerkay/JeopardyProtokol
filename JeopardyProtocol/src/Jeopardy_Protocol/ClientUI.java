@@ -220,7 +220,7 @@ public class ClientUI extends javax.swing.JFrame {
             int port = Integer.parseInt(jTextFieldPort.getText());
 
             client = new TCP_Client();
-            client.start(host, port, jTextPaneHistory, jLabelName, Abutton, Bbutton, Cbutton, Dbutton);
+            client.start(host, port, jTextPaneHistory, jLabelName, Abutton, Bbutton, Cbutton, Dbutton,jButtonDisconnect,jButtonConnect);
 
             disableConnectButton();
         } catch (IOException ex) {

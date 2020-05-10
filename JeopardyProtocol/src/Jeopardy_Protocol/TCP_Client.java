@@ -17,13 +17,14 @@ public class TCP_Client {
     private javax.swing.JButton bbut;
     private javax.swing.JButton cbut;
     private javax.swing.JButton dbut;
-
+    private javax.swing.JButton disconnectbut;// ara rapor 2 Ömer Faruk Küçüker
+    private javax.swing.JButton connectbut;
     String LastSender = "th:";//Çağrı Üstün
 
     protected void start(String host, int port, javax.swing.JTextPane jTextPaneHistory,
             javax.swing.JLabel jLabelName, javax.swing.JButton Abutton,
             javax.swing.JButton Bbutton, javax.swing.JButton Cbutton,
-            javax.swing.JButton Dbutton) throws IOException {//Ömer Faruk Küçüker
+            javax.swing.JButton Dbutton, javax.swing.JButton disconnect, javax.swing.JButton connect) throws IOException {//Ömer Faruk Küçüker 
         // client soketi oluşturma (ip + port numarası)
         clientSocket = new Socket(host, port);
 
@@ -33,6 +34,8 @@ public class TCP_Client {
         this.nameJLabel = jLabelName;
 
         //Butonlarımızı arayüzdekiler ile eşleştirdik.
+        this.disconnectbut = disconnect;//ara rapor 2 için disconnect kısmı eğer yarışma bitti denilirse çalışacak Ömer Faruk Küçüker
+        this.connectbut = connect;//ara rapor 2 için connect kısmı eğer yarışma bitti açılacak Ömer Faruk Küçüker
         this.abut = Abutton;
         this.bbut = Bbutton;
         this.cbut = Cbutton;
@@ -86,6 +89,9 @@ public class TCP_Client {
             closeButtons();
         } else if (mes.contains("Kimse Bilemedi!")) {// ikinci cevapta da yanlış cevap verilirse sonraki soru için herkesin butonları kapatılır.
             closeButtons();
+        } else if (mes.contains("Yarisma bitmistir!!") || mes.contains("Oda Şuan Dolu")) {// ara rapor 2: Çağrı Üstün Eğer yarışma bittiyse ya da oda doluysa bağlanan clientin tekrar connect olması gerekecektir
+            this.disconnectbut.setEnabled(false);
+            this.connectbut.setEnabled(true);
         }
         historyJTextPane.setText(historyJTextPane.getText() + "\n" + message);
         if (mes.contains(":") && !mes.contains("Server")) { //en son mesaj yollayan kullanıcının kim olduğu belirlenir
