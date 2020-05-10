@@ -184,7 +184,7 @@ public class TCP_Server {
                             out.writeObject("Cevap Kontrol Ediliyor Lütfen Bekleyiniz...");
 
                         }
-                        TimeUnit.SECONDS.sleep(0);
+                        TimeUnit.SECONDS.sleep(4);
                         if (mesaj.equals(soru[siradakiSoru][1])) {//Burak Enes Demir
                             sendBroadcast("Dogru cevap!");
                             for (int i = 0; i < tred.length; i++) {//Berkay Özer
@@ -201,7 +201,7 @@ public class TCP_Server {
                                 findWinner(tred);//Ömer Faruk Küçüker
                                 break;
                             }
-                            TimeUnit.SECONDS.sleep(0);
+                            TimeUnit.SECONDS.sleep(4);
                             sendBroadcast(soru[siradakiSoru][0]);
                         } else if (deneme == 1) {//Burak Enes Demir
                             sendBroadcast("Yanlis cevap!");
