@@ -24,7 +24,7 @@ public class TCP_Server {
     {"Soru3: Osmangazi nerededir ? \nA)Ankara  \nB)Bursa  \nC)İzmir  \nD)Denizli ", "B"}};
     int siradakiSoru = 0;//Burak Enes Demir
     int deneme = 1;//Burak Enes Demir
-    String[][] tred = new String[3][2];//Berkay Özer
+    String[][] yarismaciBilgileri = new String[3][2];//Berkay Özer
 
     public static void main(String[] args) throws IOException {// ara rapor 2: Burak Enes Demir server'a ait jtextpanehistory alanları temizlendi ve server arayüzü de aradan kaldırıldı.
         TCP_Server server;
@@ -35,7 +35,7 @@ public class TCP_Server {
     protected void start(int port) throws IOException {
         // server soketi oluşturma (sadece port numarası)
         serverSocket = new ServerSocket(port);
-        System.out.println("Server başlatıldı ..");
+        System.out.println(MessageUtil.SERVER_BASLATILDI);
 
         // arayüzü kitlememek için, server yeni client bağlantılarını ayrı Thread'de beklemeli
         serverThread = new Thread(() -> {
@@ -81,30 +81,31 @@ public class TCP_Server {
     }
 
     public void checkClientSizeAndQuestion() {
-        if (allClients.size() == tred.length) {//Burak Enes Demir
+        if (allClients.size() == yarismaciBilgileri.length) {//Burak Enes Demir
             try {
                 if (soru.length > 0) {
                     sendBroadcast(soru[siradakiSoru][0]);
                 } else {
-                    sendBroadcast("Hiç sorumuz kalmamıştır!");
+                    sendBroadcast(MessageUtil.SON_SORU);
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("Olmadı!" + e.getMessage());
             }
 
         }
     }
 
-    protected void findWinner(String[][] arr) throws IOException { //birincileri belirleme metodu
-        List<Integer> list = new ArrayList<Integer>(); //Ömer Faruk Küçüker
-        for (int i = 0; i < arr.length; i++) {
-            list.add(Integer.parseInt(arr[i][1]));
+    protected void findWinner(String[][] yarismaciBilgileri) throws IOException { //birincileri belirleme metodu
+        List<Integer> list = new ArrayList<>(); //Ömer Faruk Küçüker
+        Integer max;
+        for (String[] yarismaciBilgisi : yarismaciBilgileri) {
+            list.add(Integer.parseInt(yarismaciBilgisi[1]));
         }
-        int max = Collections.max(list);
+        max = Collections.max(list);
         sendBroadcast("Birinci/Birinciler:");
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i][1].equals(Integer.toString(max))) {
-                sendBroadcast(arr[i][0] + "\n");
+        for (String[] yarismaciBilgisi : yarismaciBilgileri) {
+            if (yarismaciBilgisi[1].equals(Integer.toString(max))) {
+                sendBroadcast(yarismaciBilgisi[0] + "\n");
             }
         }
     }
@@ -135,7 +136,7 @@ public class TCP_Server {
 
         @Override
         public void run() {
-            if (tred[tred.length - 1][0] != null) {//sonradan başka bir oyuncu dahil olmasın diye allclients.size()==tred.length yerine bunu kullandık
+            if (yarismaciBilgileri[yarismaciBilgileri.length - 1][0] != null) {//sonradan başka bir oyuncu dahil olmasın diye allclients.size()==yarismaciBilgileri.length yerine bunu kullandık
                 System.out.println("bağlanamadı"); //eğer böyle kullanmasaydık başka bir oyuncu oyundan çıktığında başkası yerine girebilirdi
                 try {
                     clientOutput = new ObjectOutputStream(clientSocket.getOutputStream()); //böylece odanın bu şekilde dolu olduğunu ve oyuna giremeyeceğini gösterdik
@@ -158,9 +159,9 @@ public class TCP_Server {
                     for (ObjectOutputStream out : allClients) {
                         out.writeObject(this.getName() + " server'a katıldı.");
                     }
-                    tred[allClients.size()][0] = this.getName(); //Eklenen clientlerin adını ve puanlarını arrayde tutuyor
-                    tred[allClients.size()][1] = "0";//Berkay Özer
-                    System.out.println("buraya da geldiiiiş");
+                    yarismaciBilgileri[allClients.size()][0] = this.getName(); //Eklenen clientlerin adını ve puanlarını arrayde tutuyor
+                    yarismaciBilgileri[allClients.size()][1] = "0";//Berkay Özer
+                   
                     // broadcast için, yeni gelen client'ın output stream'ını listeye ekler
                     allClients.add(clientOutput);
 
@@ -182,61 +183,61 @@ public class TCP_Server {
                         }
 
                         for (ObjectOutputStream out : allClients) {//Burak Enes Demir
-                            out.writeObject("Cevap Kontrol Ediliyor Lütfen Bekleyiniz...");
+                            out.writeObject(MessageUtil.CEVAP_KONTROL);
 
                         }
                         TimeUnit.SECONDS.sleep(4);
                         if (mesaj.equals(soru[siradakiSoru][1])) {//Burak Enes Demir
-                            sendBroadcast("Dogru cevap!");
-                            for (int i = 0; i < tred.length; i++) {//Berkay Özer
-                                if (tred[i][0].equals(this.getName())) {    //doğru bilenin puanı artırılır
-                                    tred[i][1] = "" + (Integer.parseInt(tred[i][1]) + 1);
+                            sendBroadcast(MessageUtil.DOGRU_CEVAP);
+                            for (String[] tred : yarismaciBilgileri) {
+                                //Berkay Özer
+                                if (tred[0].equals(this.getName())) {
+                                    //doğru bilenin puanı artırılır
+                                    tred[1] = "" + (Integer.parseInt(tred[1]) + 1);
                                 }
-                                sendBroadcast(tred[i][0] + "'in puani:" + tred[i][1]); //tüm puanlar soru sonu ekrana yazdırılır
+                                sendBroadcast(tred[0] + "'in puani:" + tred[1]); //tüm puanlar soru sonu ekrana yazdırılır
                             }
                             siradakiSoru++;
                             if (siradakiSoru == soru.length - 1) { //Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
-                                sendBroadcast("Son soruya ulaştınız!!");
+                                sendBroadcast(MessageUtil.SON_SORUYA_ULASILDI);
                             } else if (siradakiSoru == soru.length || allClients.size() < 2) {//Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
-                                sendBroadcast("Yarisma bitmistir!!");
-                                findWinner(tred);//Ömer Faruk Küçüker
+                                sendBroadcast(MessageUtil.YARISMA_SON);
+                                findWinner(yarismaciBilgileri);//Ömer Faruk Küçüker
                                 break;
                             }
                             TimeUnit.SECONDS.sleep(4);
                             sendBroadcast(soru[siradakiSoru][0]);
                         } else if (deneme == 1) {//Burak Enes Demir
-                            sendBroadcast("Yanlis cevap!");
+                            sendBroadcast(MessageUtil.YANLIS_CEVAP);
                             deneme++;
                         } else {//Burak Enes Demir
-                            sendBroadcast("Kimse Bilemedi!");
-                            for (int i = 0; i < tred.length; i++) {//Berkay Özer
-                                sendBroadcast(tred[i][0] + "'in puani:" + tred[i][1]);  ////tüm puanlar soru sonu ekrana yazdırılır
+                            sendBroadcast(MessageUtil.BILEN_YOK);
+                            for (String[] tred : yarismaciBilgileri) {
+                                //Berkay Özer
+                                sendBroadcast(tred[0] + "'in puani:" + tred[1]); ////tüm puanlar soru sonu ekrana yazdırılır
                             }
                             siradakiSoru++;
                             if (siradakiSoru == soru.length - 1) {//Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
-                                sendBroadcast("Son soruya ulaştınız!!");
+                                sendBroadcast(MessageUtil.SON_SORUYA_ULASILDI);
                             } else if (siradakiSoru == soru.length || allClients.size() < 2) {
-                                sendBroadcast("Yarisma bitmistir!!");
-                                findWinner(tred);//Ömer Faruk Küçüker
+                                sendBroadcast(MessageUtil.YARISMA_SON);
+                                findWinner(yarismaciBilgileri);//Ömer Faruk Küçüker
                                 break;
                             }
                             deneme = 1;
                             sendBroadcast(soru[siradakiSoru][0]);
                         }
 
-                        // "son" mesajı iletişimi sonlandırır
-                        if (mesaj.equals("son")) {
-                            break;
-                        }
                     }
                 } catch (IOException | ClassNotFoundException ex) {
                     System.out.println("bir hata yaşandı"); // catch içerisine böyle bir durum koyduk çünkü tüm oyuncular oyunun orta yerinde çıkarsa oyunun başlatılabilmesi gerekmektedir
                     allClients.remove(clientOutput);// bir client kapandığında buradan exception atar, biz de bundan istifade aynı zamanda tredlerimizi ve allclient'imizi temizleyeceğiz. 
                     if (allClients.size() == 0) {//son kısım:tüm server'ı yeni oyun için sıfırlar Berkay Özer 
                         siradakiSoru = 0;// sonuç olarak da eğer tüm clientler aynı anda terkederlerse bile server kendi içerisinde sıradaki soruya geçilmesini bekleyeceğim diye bugda kalmayacak
-                        for (int i = 0; i < tred.length; i++) { //son kısım:tredler içerisinde bulunan yarışmacı ve puanlarını yeni oyun için sildik Berkay Özer
-                            tred[i][0] = null;
-                            tred[i][1] = null;
+                        for (String[] tred : yarismaciBilgileri) {
+                            //son kısım:tredler içerisinde bulunan yarışmacı ve puanlarını yeni oyun için sildik Berkay Özer
+                            tred[0] = null;
+                            tred[1] = null;
                         }
                     }
                 } catch (InterruptedException ex) {
@@ -246,12 +247,13 @@ public class TCP_Server {
                         // client'ların tutulduğu listeden çıkart
                         allClients.remove(clientOutput);
                         if (siradakiSoru == soru.length) {//ara rapor 2:tüm server'ı yeni oyun için sıfırlar Berkay Özer kısım 2
-                            System.out.println("buraya geldi sonunda");
+                          
                             allClients.removeAll(allClients);
                             siradakiSoru = 0;
-                            for (int i = 0; i < tred.length; i++) { //ara rapor 2:tredler içerisinde bulunan yarışmacı ve puanlarını yeni oyun için sildik Berkay Özer
-                                tred[i][0] = null;
-                                tred[i][1] = null;
+                            for (String[] tred : yarismaciBilgileri) {
+                                //ara rapor 2:tredler içerisinde bulunan yarışmacı ve puanlarını yeni oyun için sildik Berkay Özer
+                                tred[0] = null;
+                                tred[1] = null;
                             }
                         }
 

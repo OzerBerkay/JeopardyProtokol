@@ -13,6 +13,7 @@ public class ClientUI extends javax.swing.JFrame {
      */
     public ClientUI() {
         initComponents();
+
     }
 
     /**
@@ -242,10 +243,6 @@ public class ClientUI extends javax.swing.JFrame {
 
                 jTextPaneMessage.setText("");
             }
-
-            if (message.equals("son")) {
-                jButtonDisconnectActionPerformed(evt);
-            }
         } catch (IOException ex) {
             System.out.println("Error - jButtonConnectActionPerformed : " + ex);
             enableConnectButton();
@@ -261,10 +258,6 @@ public class ClientUI extends javax.swing.JFrame {
                 client.sendMessage(message);
                 jTextPaneMessage.setText("");
             }
-
-            if (message.equals("son")) {
-                jButtonDisconnectActionPerformed(evt);
-            }
         } catch (IOException ex) {
             System.out.println("Error - jButtonConnectActionPerformed : " + ex);
             enableConnectButton();
@@ -279,7 +272,7 @@ public class ClientUI extends javax.swing.JFrame {
             System.out.println("Error - jButtonDisconnectActionPerformed : " + ex);
         }
     }//GEN-LAST:event_jButtonDisconnectActionPerformed
-
+    
     private void AbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbuttonActionPerformed
         try {   //Ömer Faruk Küçüker
             String message = Abutton.getText();
@@ -288,10 +281,6 @@ public class ClientUI extends javax.swing.JFrame {
                 // String mesaj gönder
                 client.sendMessage(message);
                 jTextPaneMessage.setText("");
-            }
-
-            if (message.equals("son")) {
-                jButtonDisconnectActionPerformed(evt);
             }
         } catch (IOException ex) {
             System.out.println("Error - jButtonConnectActionPerformed : " + ex);
@@ -386,10 +375,12 @@ public class ClientUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ClientUI().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

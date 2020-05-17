@@ -77,24 +77,24 @@ public class TCP_Client {
     protected void writeToHistory(Object message) {//Çağrı Üstün
         // client arayüzündeki history alanına mesajı yaz
         String mes = message.toString();
-        if (mes.contains("Soru")) {// Bir soru geldiğinde butonlar aktif olur
+        if (mes.contains(MessageUtil.SORU)) {// Bir soru geldiğinde butonlar aktif olur
             historyJTextPane.setText("");
             openButtons();
-        } else if (mes.contains("Yanlis cevap!")) { // cevap yanlışsa tüm clientların butonları aktif olur
+        } else if (mes.contains(MessageUtil.YANLIS_CEVAP)) { // cevap yanlışsa tüm clientların butonları aktif olur
             openButtons();
             if (nameJLabel.getText().equals(LastSender)) { //yanlış veren kullanıcının butonları aktif olmaz
                 closeButtons();
             }
-        } else if (mes.contains("Dogru cevap!") || mes.contains("Cevap Kontrol Ediliyor Lütfen Bekleyiniz...")) {// doğru cevap verildiğinde sıradaki soru için herkesin butonları kapatılır.
+        } else if (mes.contains(MessageUtil.DOGRU_CEVAP) || mes.contains(MessageUtil.CEVAP_KONTROL)) {// doğru cevap verildiğinde sıradaki soru için herkesin butonları kapatılır.
             closeButtons();
-        } else if (mes.contains("Kimse Bilemedi!")) {// ikinci cevapta da yanlış cevap verilirse sonraki soru için herkesin butonları kapatılır.
+        } else if (mes.contains(MessageUtil.BILEN_YOK)) {// ikinci cevapta da yanlış cevap verilirse sonraki soru için herkesin butonları kapatılır.
             closeButtons();
-        } else if (mes.contains("Yarisma bitmistir!!") || mes.contains("Oda Şuan Dolu")) {// ara rapor 2: Çağrı Üstün Eğer yarışma bittiyse ya da oda doluysa bağlanan clientin tekrar connect olması gerekecektir
+        } else if (mes.contains(MessageUtil.YARISMA_SON) || mes.contains(MessageUtil.DOLU_ODA)) {// ara rapor 2: Çağrı Üstün Eğer yarışma bittiyse ya da oda doluysa bağlanan clientin tekrar connect olması gerekecektir
             this.disconnectbut.setEnabled(false);
             this.connectbut.setEnabled(true);
         }
         historyJTextPane.setText(historyJTextPane.getText() + "\n" + message);
-        if (mes.contains(":") && !mes.contains("Server")) { //en son mesaj yollayan kullanıcının kim olduğu belirlenir
+        if (mes.contains(":") && !mes.contains(MessageUtil.SERVER)) { //en son mesaj yollayan kullanıcının kim olduğu belirlenir
             LastSender = mes.substring(0, mes.indexOf(':')).trim();
             System.out.println(LastSender);
         }
@@ -122,7 +122,7 @@ public class TCP_Client {
         @Override
         public void run() {
             try {
-                writeToHistory("Server'a bağlandı ..");
+                writeToHistory(MessageUtil.CONNECTED_SERVER);
 
                 Object mesaj;
                 // server mesaj gönderdiği sürece gelen mesajı al
