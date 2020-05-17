@@ -94,6 +94,7 @@ public class TCP_Server {
 
         }
     }
+
     protected void findWinner(String[][] arr) throws IOException { //birincileri belirleme metodu
         List<Integer> list = new ArrayList<Integer>(); //Ömer Faruk Küçüker
         for (int i = 0; i < arr.length; i++) {
@@ -229,7 +230,15 @@ public class TCP_Server {
                         }
                     }
                 } catch (IOException | ClassNotFoundException ex) {
-                    System.out.println("Hata - ListenThread : " + ex);
+                    System.out.println("bir hata yaşandı"); // catch içerisine böyle bir durum koyduk çünkü tüm oyuncular oyunun orta yerinde çıkarsa oyunun başlatılabilmesi gerekmektedir
+                    allClients.remove(clientOutput);// bir client kapandığında buradan exception atar, biz de bundan istifade aynı zamanda tredlerimizi ve allclient'imizi temizleyeceğiz. 
+                    if (allClients.size() == 0) {//son kısım:tüm server'ı yeni oyun için sıfırlar Berkay Özer 
+                        siradakiSoru = 0;// sonuç olarak da eğer tüm clientler aynı anda terkederlerse bile server kendi içerisinde sıradaki soruya geçilmesini bekleyeceğim diye bugda kalmayacak
+                        for (int i = 0; i < tred.length; i++) { //son kısım:tredler içerisinde bulunan yarışmacı ve puanlarını yeni oyun için sildik Berkay Özer
+                            tred[i][0] = null;
+                            tred[i][1] = null;
+                        }
+                    }
                 } catch (InterruptedException ex) {
                     Logger.getLogger(TCP_Server.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
