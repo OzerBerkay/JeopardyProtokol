@@ -1,6 +1,10 @@
 package Jeopardy_Protocol;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -19,14 +23,68 @@ public class TCP_Server {
     private javax.swing.JTextPane historyJTextPane;
     private Thread serverThread;
     private HashSet<ObjectOutputStream> allClients = new HashSet<>();
-    String[][] soru = {{"Soru1: Türkiyenin Baskenti Neresidir? \n A)Ankara  \nB)Bursa  \nC)İzmir  \nD)Denizli ", "A"},
-    {"Soru2: Kadıköy nerededir? \nA)Ankara  \nB)Bursa  \nC)İstanbul  \nD)Denizli ", "C"},
-    {"Soru3: Osmangazi nerededir ? \nA)Ankara  \nB)Bursa  \nC)İzmir  \nD)Denizli ", "B"}};
+    static String[][] soru;
     int siradakiSoru = 0;//Burak Enes Demir
     int deneme = 1;//Burak Enes Demir
     String[][] yarismaciBilgileri = new String[3][2];//Berkay Özer
 
+    public static int satirSayisi() {//cagri ustun proje sonu: text dosyasındaki satır okuma işlemini yapar
+        int sayac = 0;
+        try {
+            FileInputStream fStream = new FileInputStream("test.txt");
+            DataInputStream dStream = new DataInputStream((fStream));
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(dStream));
+
+            int i = 0;
+            while ((bReader.readLine()) != null) {
+                sayac++;
+            }
+            dStream.close();
+        } catch (Exception e) {
+            System.err.println("Hata : " + e.getMessage());
+        }
+        return sayac;
+    }
+
     public static void main(String[] args) throws IOException {// ara rapor 2: Burak Enes Demir server'a ait jtextpanehistory alanları temizlendi ve server arayüzü de aradan kaldırıldı.
+        String str;//cagri ustun proje sonu: Tcp_Server server'a gelene kadar dosya okuma ve soruları alma işlemlerini tamamlar
+        String[] veri;
+        int satirSayisi2 = satirSayisi();
+        System.out.println("Satır Sayısı: " + satirSayisi2);
+        veri = new String[satirSayisi2];
+        soru = new String[satirSayisi2 / 2][2];
+        try {
+            FileInputStream fStream = new FileInputStream("test.txt");
+            DataInputStream dStream = new DataInputStream((fStream));
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(dStream));
+
+            int i = 0;
+            while ((str = bReader.readLine()) != null) {
+                veri[i] = str;
+
+                i++;
+            }
+
+            dStream.close();
+        } catch (Exception e) {
+            System.err.println("Hata : " + e.getMessage());
+        }
+        int a = 0;
+        for (int i = 0; i < satirSayisi2; i++) {
+            if (i % 2 == 0) {
+                soru[a][0] = veri[i];
+            }
+            if (i % 2 == 1) {
+                soru[a][1] = veri[i];
+                a++;
+            }
+        }
+
+        for (int i = 0; i < satirSayisi2 / 2; i++) {
+            for (int k = 0; k < 2; k++) {
+                System.out.println(soru[i][k]);
+            }
+        }
         TCP_Server server;
         server = new TCP_Server();
         server.start(44444);
@@ -196,8 +254,10 @@ public class TCP_Server {
                                     tred[1] = "" + (Integer.parseInt(tred[1]) + 1);
                                 }
                                 sendBroadcast(tred[0] + "'in puani:" + tred[1]); //tüm puanlar soru sonu ekrana yazdırılır
+                                
                             }
                             siradakiSoru++;
+                            deneme=1;
                             TimeUnit.SECONDS.sleep(4);
                             if (siradakiSoru == soru.length - 1) { //Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
                                 sendBroadcast(MessageUtil.SON_SORUYA_ULASILDI);
