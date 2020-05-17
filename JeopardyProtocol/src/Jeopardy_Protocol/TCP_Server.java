@@ -161,7 +161,7 @@ public class TCP_Server {
                     }
                     yarismaciBilgileri[allClients.size()][0] = this.getName(); //Eklenen clientlerin adını ve puanlarını arrayde tutuyor
                     yarismaciBilgileri[allClients.size()][1] = "0";//Berkay Özer
-                   
+
                     // broadcast için, yeni gelen client'ın output stream'ını listeye ekler
                     allClients.add(clientOutput);
 
@@ -198,6 +198,7 @@ public class TCP_Server {
                                 sendBroadcast(tred[0] + "'in puani:" + tred[1]); //tüm puanlar soru sonu ekrana yazdırılır
                             }
                             siradakiSoru++;
+                            TimeUnit.SECONDS.sleep(4);
                             if (siradakiSoru == soru.length - 1) { //Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
                                 sendBroadcast(MessageUtil.SON_SORUYA_ULASILDI);
                             } else if (siradakiSoru == soru.length || allClients.size() < 2) {//Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
@@ -247,7 +248,7 @@ public class TCP_Server {
                         // client'ların tutulduğu listeden çıkart
                         allClients.remove(clientOutput);
                         if (siradakiSoru == soru.length) {//ara rapor 2:tüm server'ı yeni oyun için sıfırlar Berkay Özer kısım 2
-                          
+
                             allClients.removeAll(allClients);
                             siradakiSoru = 0;
                             for (String[] tred : yarismaciBilgileri) {

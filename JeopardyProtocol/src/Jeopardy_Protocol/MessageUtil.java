@@ -5,10 +5,7 @@
  */
 package Jeopardy_Protocol;
 
-/**
- *
- * @author KGTeknoloji
- */
+
 public class MessageUtil {
     public static final String SON = "son";
     public static final String SORU = "Soru";
