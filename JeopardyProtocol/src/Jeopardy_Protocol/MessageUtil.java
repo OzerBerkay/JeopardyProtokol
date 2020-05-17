@@ -6,8 +6,8 @@
 package Jeopardy_Protocol;
 
 
-public class MessageUtil {
-    public static final String SON = "son";
+public class MessageUtil {//Burak Enes Demir Proje Sonu: Projede String değişkenler üzerinden kıyas yapılıyordu. Bunlarla alakalı gelecekte bir sorun 
+    public static final String SON = "son";//yaşanmaması açısından bir Util class oluşturuldu ve string ifa-deler bu util class içerisinde tanımlandı.
     public static final String SORU = "Soru";
     public static final String YANLIS_CEVAP = "Yanlis cevap!";
     public static final String DOGRU_CEVAP = "Dogru cevap!";
