@@ -26,7 +26,7 @@ public class TCP_Server {
     static String[][] soru;
     int siradakiSoru = 0;//Burak Enes Demir
     int deneme = 1;//Burak Enes Demir
-    String[][] yarismaciBilgileri = new String[3][2];//Berkay Özer
+    String[][] yarismaciBilgileri = new String[2][2];//Berkay Özer
 
     public static int satirSayisi() {//cagri ustun proje sonu: text dosyasındaki satır okuma işlemini yapar
         int sayac = 0;
@@ -59,8 +59,15 @@ public class TCP_Server {
             BufferedReader bReader = new BufferedReader(new InputStreamReader(dStream));
 
             int i = 0;
+            String quest = "";
             while ((str = bReader.readLine()) != null) {
-                veri[i] = str;
+                String[] parts = str.split("-");
+                for (int j = 0; j < parts.length; j++) {//berkay özer proje sonu: Burada yazdığımız kod ile dosyadan okuduğumuz \n karakterlerinin new line
+                    quest = quest + parts[j] + "\n";//karakteri sayılmaması sonucunda biz de gelen satırı parçalayıp manuel olarak yeni satır
+                }                                   // eklemesi yapmaktayız.
+                
+                veri[i] = quest;
+                quest="";
 
                 i++;
             }
@@ -245,7 +252,7 @@ public class TCP_Server {
 
                         }
                         TimeUnit.SECONDS.sleep(4);
-                        if (mesaj.equals(soru[siradakiSoru][1])) {//Burak Enes Demir
+                        if (mesaj.equals(soru[siradakiSoru][1].trim())) {//Burak Enes Demir
                             sendBroadcast(MessageUtil.DOGRU_CEVAP);
                             for (String[] tred : yarismaciBilgileri) {
                                 //Berkay Özer
@@ -254,10 +261,10 @@ public class TCP_Server {
                                     tred[1] = "" + (Integer.parseInt(tred[1]) + 1);
                                 }
                                 sendBroadcast(tred[0] + "'in puani:" + tred[1]); //tüm puanlar soru sonu ekrana yazdırılır
-                                
+
                             }
                             siradakiSoru++;
-                            deneme=1;
+                            deneme = 1;
                             TimeUnit.SECONDS.sleep(4);
                             if (siradakiSoru == soru.length - 1) { //Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
                                 sendBroadcast(MessageUtil.SON_SORUYA_ULASILDI);
@@ -278,6 +285,8 @@ public class TCP_Server {
                                 sendBroadcast(tred[0] + "'in puani:" + tred[1]); ////tüm puanlar soru sonu ekrana yazdırılır
                             }
                             siradakiSoru++;
+                            TimeUnit.SECONDS.sleep(4);
+
                             if (siradakiSoru == soru.length - 1) {//Berkay Özer Sona yaklaşıldığının veya yarışmaının bittiğinin bilgisini döndürür
                                 sendBroadcast(MessageUtil.SON_SORUYA_ULASILDI);
                             } else if (siradakiSoru == soru.length || allClients.size() < 2) {

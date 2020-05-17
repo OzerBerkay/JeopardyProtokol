@@ -1,12 +1,12 @@
-Soru1:Türkiyenin başkenti neresidir? A)Ankara B)İstanbul C)Edirne D)Tunceli
+﻿Soru1:Türkiyenin başkenti neresidir?-A)Ankara-B)İstanbul-C)Edirne-D)Tunceli
 A
-Soru2:UEFA kupasını kazanan türk takım? A)Beşiktaş B)Fenerbahçe C)Galatasaray D)Trabzonspor
-B
-Soru3:Bir yılda kaç gün vardır? A)300 B)350 C)365 D)400
+Soru2:UEFA kupasını kazanan türk takım?-A)Beşiktaş-B)Fenerbahçe-C)Galatasaray-D)Trabzonspor
 C
-Soru4:En soğuk mevsim hangisidir? A)Sonbahar B)İlkbahar C)Yaz D)Kış
+Soru3:Bir yılda kaç gün vardır?-A)300-B)350-C)365-D)400
+C
+Soru4:En soğuk mevsim hangisidir?-A)Sonbahar-B)İlkbahar-C)Yaz-D)Kış
 D
-Soru5:((1+1)*1)/1 kaçtır? A)2 B)1 C)3 D)4
+Soru5:((1+1)*1)/1 kaçtır?-A)2-B)1-C)3-D)4
 A
-Soru6:Bilgisayar kelimesinde kaç harf vardır? A)8 B)9 C)10 D)11
+Soru6:Bilgisayar kelimesinde kaç harf vardır?-A)8-B)9-C)10-D)11
 C
