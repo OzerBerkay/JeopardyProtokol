@@ -105,7 +105,7 @@ public class ClientUI extends javax.swing.JFrame {
         });
         getContentPane().add(Dbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 245, 80, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Berkay\\Documents\\ağlardersi\\jp4\\JeopardyProtokol\\JeopardyProtocol\\back2.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("JeopardyProtocol\\back2.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 468, -1));
 
         pack();
